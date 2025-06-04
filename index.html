@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cek Khodam Online</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Cek Khodam </h1>
+        <form id="KhodamForm">
+            <input type="text" id="nama" placeholder="Masukkan nama Anda" required>
+            <button type="submit">Gacha Khodam</button>
+        </form>
+        <div class="result" id="result"></div>
+        <div class="khodam-image" id="khodamImage"></div>
+    </div>
+    <div class="loading" id="loading" style="display: none;">
+        <div class="spinner"></div>
+    </div>
+    <div class="copyright">
+        <p>Copyright 2024 / Rhmt Tahalul</p>
+    </div>
+    <script>
+        const khodamList = [
+            { name: "Khodam Ambatron", img: "ambatreonm.jpg" },
+            { name: "Khodam Macan Ireng", img: "macan ireng.jpg" },
+            { name: "Khodam Tidak Ada", img: "" },
+            { name: "Khodam Sempak Gusion", img: "gusion.jpg" },
+            { name: "Khodam Bahasa Pemrograman Python", img: "python.png" },
+            { name: "laba laba sunda", img: "sunda.jpg" },
+            { name: "roger sumatra", img: "roger ssumatra.jpg" },
+            { name: "kesatria kegelapan", img: "ksatria kegelapan.jpg" },
+            { name: "Kucing akmal", img: "kucing akmal.jpg" },
+            { name: "skibidi bintang lima", img: " bintang 5.jpg" },
+            { name: "sigit rendnag", img: "sigit.png" },
+            { name: "harimau cisewu", img: "harimau.jpg" },
+            { name: "yao ming", img: "images.jpg" },
+      
+        ];
+
+        function pilihkhodam(event) {
+            event.preventDefault();
+            const nama = document.getElementById("nama").value;
+            const resultDiv = document.getElementById("result");
+            const khodamImageDiv = document.getElementById("khodamImage");
+            const loadingDiv = document.getElementById("loading");
+            resultDiv.textContent = "";
+            khodamImageDiv.innerHTML = "";
+            loadingDiv.style.display = "flex";
+
+            if (nama) {
+                setTimeout(() => {
+                    const randomIndex = Math.floor(Math.random() * khodamList.length);
+                    const khodamTerpilih = khodamList[randomIndex];
+                    resultDiv.textContent = `Nama Anda adalah ${nama} dan khodam pilihan Anda adalah ${khodamTerpilih.name}.`;
+
+                    const imgElement = document.createElement("img");
+                    imgElement.src = khodamTerpilih.img;
+                    imgElement.alt = khodamTerpilih.name;
+                    imgElement.style.maxWidth = "200px";
+                    khodamImageDiv.appendChild(imgElement);
+
+                    loadingDiv.style.display = "none";
+
+                    setTimeout(() => {
+                        resultDiv.textContent = "";
+                        khodamImageDiv.innerHTML = "";
+                    }, 5000);
+                }, 2000); // Simulating loading time
+            } else {
+                resultDiv.textContent = "Nama tidak boleh kosong.";
+                loadingDiv.style.display = "none";
+            }
+        }
+
+        document.getElementById("KhodamForm").addEventListener("submit", pilihkhodam);
+    </script>
+</body>
+</html>
