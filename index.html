@@ -15,6 +15,7 @@
         </form>
         <div class="result" id="result"></div>
         <div class="khodam-image" id="khodamImage"></div>
+        <button id="backButton" style="display: none;">Kembali</button>
     </div>
     <div class="loading" id="loading" style="display: none;">
         <div class="spinner"></div>
@@ -37,8 +38,20 @@
             { name: "sigit rendnag", img: "sigit.png" },
             { name: "harimau cisewu", img: "harimau.jpg" },
             { name: "yao ming", img: "images.jpg" },
-      
         ];
+
+        function resetForm() {
+            const resultDiv = document.getElementById("result");
+            const khodamImageDiv = document.getElementById("khodamImage");
+            const backButton = document.getElementById("backButton");
+            const khodamForm = document.getElementById("KhodamForm");
+            
+            resultDiv.textContent = "";
+            khodamImageDiv.innerHTML = "";
+            backButton.style.display = "none";
+            khodamForm.style.display = "flex";
+            document.getElementById("nama").value = "";
+        }
 
         function pilihkhodam(event) {
             event.preventDefault();
@@ -46,6 +59,9 @@
             const resultDiv = document.getElementById("result");
             const khodamImageDiv = document.getElementById("khodamImage");
             const loadingDiv = document.getElementById("loading");
+            const backButton = document.getElementById("backButton");
+            const khodamForm = document.getElementById("KhodamForm");
+            
             resultDiv.textContent = "";
             khodamImageDiv.innerHTML = "";
             loadingDiv.style.display = "flex";
@@ -63,12 +79,9 @@
                     khodamImageDiv.appendChild(imgElement);
 
                     loadingDiv.style.display = "none";
-
-                    setTimeout(() => {
-                        resultDiv.textContent = "";
-                        khodamImageDiv.innerHTML = "";
-                    }, 5000);
-                }, 2000); // Simulating loading time
+                    backButton.style.display = "block";
+                    khodamForm.style.display = "none";
+                }, 2000);
             } else {
                 resultDiv.textContent = "Nama tidak boleh kosong.";
                 loadingDiv.style.display = "none";
@@ -76,6 +89,7 @@
         }
 
         document.getElementById("KhodamForm").addEventListener("submit", pilihkhodam);
+        document.getElementById("backButton").addEventListener("click", resetForm);
     </script>
 </body>
 </html>
